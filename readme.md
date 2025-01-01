@@ -1,7 +1,7 @@
 # Azure Web App Module
 
 ## Overview
-This Terraform module creates an Azure Web App with configurable settings and tags. It also provisions the App Service Plan required for the Web App.
+This Terraform module creates an Azure Web App with configurable settings and tags. It also provisions the App Service Plan required for the Web App. For latest version please check from https://app.terraform.io/app/shiazy18/registry/modules/private/shiazy18/web-app/azurerm/1.0.0
 
 ## Requirements
 - Azure Subscription
