@@ -21,7 +21,7 @@ This Terraform module creates an Azure Web App with configurable settings and ta
 ## Usage
 ```hcl
 module "web_app" {
-  source              = "app.terraform.io/your-org/azure-webapp-module/azurerm"
+  source              = "app.terraform.io/shiazy18/web-app/azurerm"
   version             = "1.0.0"
 
   location            = "East US"
