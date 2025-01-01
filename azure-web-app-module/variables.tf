@@ -2,10 +2,11 @@ variable "app_name" {
   description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
   type        = string
   validation {
-    condition     = can(regex("^${var.tags["owner"]}-${var.tags["product"]}-${var.tags["application"]}-${var.location}-web-app$", var.app_name))
-    error_message = "The app name must follow the format 'owner-product-application-location-web-app'."
+    condition     = can(regex("^[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-web-app$", var.app_name))
+    error_message = "The app name must follow the format 'owner-product-application-location-web-app' (e.g., teamA-productX-portal-EastUS-web-app)."
   }
 }
+
 
 variable "location" {
   description = "Azure location where the resources will be created. Must be one of 'East US', 'West US', or 'Central US'."
