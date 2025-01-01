@@ -1,9 +1,9 @@
 variable "app_name" {
-  description = "The name of the web app. Must start with a letter and be between 3 and 24 characters."
+  description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
   type        = string
   validation {
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{2,23}$", var.app_name))
-    error_message = "The app name must start with a letter, can contain letters, numbers, and hyphens, and must be between 3 and 24 characters."
+    condition     = can(regex("^${var.tags["owner"]}-${var.tags["product"]}-${var.tags["application"]}-${var.location}-web-app$", var.app_name))
+    error_message = "The app name must follow the format 'owner-product-application-location-web-app'."
   }
 }
 
@@ -31,4 +31,14 @@ variable "app_settings" {
   description = "A map of app settings for the web app."
   type        = map(string)
   default     = {}
+}
+
+variable "tags" {
+  description = "A map of tags to be applied to resources. Must include 'product', 'application', and 'owner' keys."
+  type        = map(string)
+  default     = { product = "shiazy", application = "ecom", owner = "hr" }
+  validation {
+    condition     = contains(keys(var.tags), "product") && contains(keys(var.tags), "application") && contains(keys(var.tags), "owner")
+    error_message = "Tags must include 'product', 'application', and 'owner' keys."
+  }
 }
