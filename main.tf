@@ -27,3 +27,11 @@ resource "azurerm_app_service" "webapp" {
 
   app_settings = var.app_settings
 }
+
+resource "azurerm_application_insights" "app_insights" {
+  count               = var.enable_app_insights ? 1 : 0
+  name                = "${var.tags["owner"]}-${var.tags["application"]}-ai"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  application_type    = "web"
+}
