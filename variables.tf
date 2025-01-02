@@ -1,11 +1,11 @@
-variable "app_name" {
-  description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
-  type        = string
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-web-app$", var.app_name))
-    error_message = "The app name must follow the format 'owner-product-application-location-web-app' (e.g., teamA-productX-portal-EastUS-web-app)."
-  }
-}
+# variable "app_name" {
+#   description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
+#   type        = string
+#   validation {
+#     condition     = can(regex("^[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-web-app$", var.app_name))
+#     error_message = "The app name must follow the format 'owner-product-application-location-web-app' (e.g., teamA-productX-portal-EastUS-web-app)."
+#   }
+# }
 
 
 variable "location" {
@@ -54,4 +54,10 @@ variable "tags" {
     condition     = contains(keys(var.tags), "product") && contains(keys(var.tags), "application") && contains(keys(var.tags), "owner")
     error_message = "Tags must include 'product', 'application', and 'owner' keys."
   }
+}
+
+variable "enable_app_insights" {
+  description = "Enable Application Insights."
+  type        = bool
+  default     = false
 }
