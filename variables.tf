@@ -34,17 +34,6 @@ variable "app_settings" {
   default     = {}
 }
 
-variable "sku_tier" {
-  description = "The SKU tier for the App Service Plan."
-  type        = string
-  default     = "Standard"
-}
-
-variable "sku_size" {
-  description = "The SKU size for the App Service Plan."
-  type        = string
-  default     = "S1"
-}
 
 variable "tags" {
   description = "A map of tags to be applied to resources. Must include 'product', 'application', and 'owner' keys."
@@ -55,6 +44,7 @@ variable "tags" {
     error_message = "Tags must include 'product', 'application', and 'owner' keys."
   }
 }
+
 
 variable "enable_app_insights" {
   description = "Enable Application Insights."
@@ -74,14 +64,99 @@ variable "enable_deployment_slot" {
   default     = false
 }
 
-# variable "sku_tier" {
-#   description = "Tier of the App Service Plan."
-#   type        = string
-#   default     = "Standard"
-# }
+variable "sku_tier" {
+  description = "Tier of the App Service Plan."
+  type        = string
+  default     = "Standard"
+}
 
-# variable "sku_size" {
-#   description = "Size of the App Service Plan."
-#   type        = string
-#   default     = "S1"
-# }
+variable "sku_size" {
+  description = "Size of the App Service Plan."
+  type        = string
+  default     = "S1"
+}
+
+variable "autoscale_default_capacity" {
+  description = "Default capacity for autoscaling."
+  type        = number
+  default     = 1
+}
+
+variable "autoscale_min_capacity" {
+  description = "Minimum capacity for autoscaling."
+  type        = number
+  default     = 1
+}
+
+variable "autoscale_max_capacity" {
+  description = "Maximum capacity for autoscaling."
+  type        = number
+  default     = 3
+}
+
+variable "autoscale_metric_name" {
+  description = "Metric to trigger autoscale."
+  type        = string
+  default     = "CpuPercentage"
+}
+
+variable "autoscale_time_grain" {
+  description = "Time grain for metric evaluation."
+  type        = string
+  default     = "PT1M"
+}
+
+variable "autoscale_statistic" {
+  description = "Statistic for autoscale metric."
+  type        = string
+  default     = "Average"
+}
+
+variable "autoscale_operator" {
+  description = "Operator for autoscale rule."
+  type        = string
+  default     = "GreaterThan"
+}
+
+variable "autoscale_threshold" {
+  description = "Threshold for autoscale rule."
+  type        = number
+  default     = 70
+}
+
+variable "autoscale_time_aggregation" {
+  description = "Time aggregation for autoscale rule."
+  type        = string
+  default     = "Average"
+}
+
+variable "autoscale_time_window" {
+  description = "Time window for metric evaluation."
+  type        = string
+  default     = "PT5M"
+}
+
+variable "autoscale_direction" {
+  description = "Direction of scaling (Increase/Decrease)."
+  type        = string
+  default     = "Increase"
+}
+
+variable "autoscale_type" {
+  description = "Type of scaling (ChangeCount/ExactCount/PercentChange)."
+  type        = string
+  default     = "ChangeCount"
+}
+
+variable "autoscale_value" {
+  description = "Value by which to scale."
+  type        = number
+  default     = 1
+}
+
+variable "autoscale_cooldown" {
+  description = "Cooldown period before scaling again."
+  type        = string
+  default     = "PT5M"
+}
+

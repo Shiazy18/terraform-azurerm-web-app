@@ -1,4 +1,3 @@
-
 resource "azurerm_resource_group" "rg" {
   name     = "${var.tags["owner"]}-${var.tags["product"]}-${var.tags["application"]}-${var.location}-rg"
   location = var.location
@@ -48,31 +47,30 @@ resource "azurerm_monitor_autoscale_setting" "autoscale" {
     name = "default"
 
     capacity {
-      default = 1
-      minimum = 1
-      maximum = 3
+      default = var.autoscale_default_capacity
+      minimum = var.autoscale_min_capacity
+      maximum = var.autoscale_max_capacity
     }
 
     rule {
       metric_trigger {
-        metric_name        = "CpuPercentage"
+        metric_name        = var.autoscale_metric_name
         metric_resource_id = azurerm_app_service_plan.app_plan.id
-        time_grain         = "PT1M"
-        statistic          = "Average"
-        operator           = "GreaterThan"
-        threshold          = 70
-        time_aggregation   = "Average" # <- Add this line
-        time_window        = "PT5M"    # <- And this line
+        time_grain         = var.autoscale_time_grain
+        statistic          = var.autoscale_statistic
+        operator           = var.autoscale_operator
+        threshold          = var.autoscale_threshold
+        time_aggregation   = var.autoscale_time_aggregation
+        time_window        = var.autoscale_time_window
       }
 
       scale_action {
-        direction = "Increase"
-        type      = "ChangeCount"
-        value     = 1
-        cooldown  = "PT5M"
+        direction = var.autoscale_direction
+        type      = var.autoscale_type
+        value     = var.autoscale_value
+        cooldown  = var.autoscale_cooldown
       }
     }
-
   }
 }
 
