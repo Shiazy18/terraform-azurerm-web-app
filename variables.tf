@@ -1,11 +1,11 @@
-variable "app_name" {
-  description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
-  type        = string
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-web-app$", var.app_name))
-    error_message = "The app name must follow the format 'owner-product-application-location-web-app' (e.g., teamA-productX-portal-EastUS-web-app)."
-  }
-}
+# variable "app_name" {
+#   description = "The name of the web app. Must follow the format 'owner-product-application-location-web-app'."
+#   type        = string
+#   validation {
+#     condition     = can(regex("^[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+-web-app$", var.app_name))
+#     error_message = "The app name must follow the format 'owner-product-application-location-web-app' (e.g., teamA-productX-portal-EastUS-web-app)."
+#   }
+# }
 
 
 variable "location" {
@@ -55,3 +55,33 @@ variable "tags" {
     error_message = "Tags must include 'product', 'application', and 'owner' keys."
   }
 }
+
+variable "enable_app_insights" {
+  description = "Enable Application Insights."
+  type        = bool
+  default     = false
+}
+
+variable "enable_autoscale" {
+  description = "Enable Auto Scaling."
+  type        = bool
+  default     = false
+}
+
+variable "enable_deployment_slot" {
+  description = "Enable Deployment Slot for Blue-Green Deployment."
+  type        = bool
+  default     = false
+}
+
+# variable "sku_tier" {
+#   description = "Tier of the App Service Plan."
+#   type        = string
+#   default     = "Standard"
+# }
+
+# variable "sku_size" {
+#   description = "Size of the App Service Plan."
+#   type        = string
+#   default     = "S1"
+# }
