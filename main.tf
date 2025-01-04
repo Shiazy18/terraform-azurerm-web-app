@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "${var.tags["owner"]}-${var.tags["product"]}-${var.tags["application"]}-${var.location}-rg"
+  name     = "${var.tags["owner"]}-${var.tags["product"]}-${var.tags["application"]}-${var.location}-webapp-rg"
   location = var.location
   tags     = var.tags
 }
