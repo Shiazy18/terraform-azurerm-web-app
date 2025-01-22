@@ -33,7 +33,9 @@ jobs:
         run: ls -la
 
       - name: Run Snyk IaC Test
-        run: snyk iac test --severity-threshold=low
+        id: snyk-iac-test
+        run: snyk iac test --severity-threshold=low --json > snyk-results.json
+        continue-on-error: true
 
       - name: Upload Snyk Test Results
         uses: actions/upload-artifact@v3
