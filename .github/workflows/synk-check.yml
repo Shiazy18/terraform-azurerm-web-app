@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+  schedule:
+    - cron: '0 0 * * *'
+
 jobs:
   snyk-check:
     name: Run Snyk Security Check
@@ -31,3 +34,13 @@ jobs:
 
       - name: Run Snyk IaC Test
         run: snyk iac test --severity-threshold=low
+
+      - name: Upload Snyk Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: snyk-results
+          path: snyk-results.json
+          retention_days: 2
+
+      - name: Monitor Project in Snyk UI
+        run: snyk monitor || true
