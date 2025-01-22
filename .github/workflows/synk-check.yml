@@ -1,6 +1,7 @@
 name: Snyk PR Check
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main  # Adjust to the default branch of your repository
