@@ -1,0 +1,38 @@
+name: Snyk PR Check
+
+on:
+  pull_request:
+    branches:
+      - main  # Adjust to the default branch of your repository
+
+jobs:
+  snyk-check:
+    name: Run Snyk Security Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the PR
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js (required for Snyk CLI)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Use the Node.js version compatible with your project
+
+      # Install Snyk CLI
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      # Authenticate Snyk (requires SNYK_TOKEN secret in your repo)
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      # Run Snyk test for vulnerabilities
+      - name: Run Snyk Test
+        run: snyk test --all-projects --severity-threshold=low
+
+      # Run Snyk monitor to track dependencies (optional)
+      - name: Monitor Project in Snyk
+        run: snyk monitor
