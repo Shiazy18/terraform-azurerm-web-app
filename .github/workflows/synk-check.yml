@@ -42,7 +42,7 @@ jobs:
         with:
           name: snyk-results
           path: snyk-results.json
-          retention_days: 2
+          retention-days: 2
 
       - name: Monitor Project in Snyk UI
         run: snyk monitor || true
